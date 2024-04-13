@@ -21,4 +21,4 @@ curl -L -X GET \
         --url "$PC_APIURL/v2/alert?alert.status=open&detailed=true&fields=alert.id,policy.name,policy.type,policy.label,policy.severity,resource.name,cloud.type,cloud.account,cloud.accountId,resource.id,alert.status" \
         -H 'Accept: */*' \
         -H 'Content-Type: application/json; charset=UTF-8' \
-        -H "x-redlock-auth: $PC_JWT" | jq .items[] | jq '{id, policy_name: .policy.name, policy_type: .policy.policyType, policy_severity: .policy.severity, resource_name: .resource.name, cloud_type: .resource.cloudType, aws_accountid: .resource.accountId, resource_id: .resource.id}'
+        -H "x-redlock-auth: $PC_JWT" | jq .items[] | jq -r '[.id, .policy.name, .policy.policyType, .policy.severity, .resource.name, .resource.cloudType, .resource.accountId, .resource.id] | @csv' > output.csv
