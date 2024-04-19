@@ -26,5 +26,4 @@ curl -L -X GET \
         --url "$PC_APIURL/v2/alert?alert.status=open&detailed=true" \
         -H 'Accept: */*' \
         -H 'Content-Type: application/json; charset=UTF-8' \
-        -H "x-redlock-auth: $PC_JWT" | jq .items[] | jq -r '[.resource.accountId, .resource.account, .resource.region, .resource.resourceType, .resource.name, .policy.name, .policy.description, .policy.severity, .policy.recommendation, .status] | @csv' >> $REPORT_LOCATION
-
+        -H "x-redlock-auth: $PC_JWT" | jq ' .items |  group_by(.resource.name)[] | .[]' | jq -r '[.resource.accountId, .resource.account, .resource.region, .resource.resourceType, .resource.name, .policy.name, .policy.description, .policy.severity, .policy.recommendation, .status] | @csv' >> $REPORT_LOCATION
