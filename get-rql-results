@@ -1,0 +1,33 @@
+PC_APIURL="https://apix.prismacloud.io"
+PC_ACCESSKEY=""
+PC_SECRETKEY=""
+REPORT_DATE=$(date  +%m_%d_%y)
+REPORT_LOCATION="$HOME/reports/alert_report_$REPORT_DATE.csv"
+mkdir -p $HOME/reports
+
+AUTH_PAYLOAD=$(cat <<EOF
+{"username": "$PC_ACCESSKEY", "password": "$PC_SECRETKEY"}
+EOF
+)
+
+PC_JWT_RESPONSE=$(curl -s --request POST \
+                       --url "$PC_APIURL/login" \
+                       --header 'Accept: application/json; charset=UTF-8' \
+                       --header 'Content-Type: application/json; charset=UTF-8' \
+                       --data "${AUTH_PAYLOAD}")
+
+
+PC_JWT=$(printf %s "$PC_JWT_RESPONSE" | jq -r '.token' )
+
+#udpate variable
+INSTANCE_ID="xyz"
+curl --url "$PC_APIURL/search/api/v2/config" \
+     --header "accept: application/json; charset=UTF-8" \
+     --header "content-type: application/json" \
+     --header "x-redlock-auth: $PC_JWT" \
+--data-raw '{
+  "limit": 0,
+  "withResourceJson": true,
+  "startTime": 0,
+  "query": "config from cloud.resource where api.name = \"aws-ec2-describe-instances\" AND json.rule = instanceId equals $INSTANCE_ID"
+}'
