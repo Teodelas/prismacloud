@@ -29,5 +29,5 @@ curl --url "$PC_APIURL/search/api/v2/config" \
   "limit": 0,
   "withResourceJson": true,
   "startTime": 0,
-  "query": "config from cloud.resource where api.name = \"aws-ec2-describe-instances\" AND json.rule = instanceId equals $INSTANCE_ID"
+  "query": "config from cloud.resource where api.name = \"aws-ec2-describe-instances\" AND json.rule = instanceId equals \"$INSTANCE_ID\""
 }'
