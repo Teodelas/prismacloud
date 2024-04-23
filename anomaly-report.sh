@@ -41,7 +41,7 @@ for i in "${!anomaly_reports[@]}"; do
 
   echo "Alert Id, Resource Name, Resource ID, Account Id, Account, Region, Resource Type, Anomalous Public IP" > $REPORT_LOCATION
   curl -L -X GET \
-        --url "$PC_APIURL/v2/alert?timeType=relative&timeAmount=1&timeUnit=year&detailed=false&alert.status=open&policy.id=$POLICY_ID" \
+        --url "$PC_APIURL/v2/alert?timeType=relative&timeAmount=2&timeUnit=year&detailed=false&alert.status=open&policy.id=$POLICY_ID" \
         --header "accept: application/json; charset=UTF-8" \
         --header "content-type: application/json" \
         --header "x-redlock-auth: $PC_JWT" | jq ' .items[]' | jq -r '[.id, .resource.name, .resource.id, .resource.accountId, .resource.account, .resource.region, .resource.resourceType, .anomalyDetail.targetHost.ip] | @csv' >> $REPORT_LOCATION
