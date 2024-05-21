@@ -1,0 +1,21 @@
+variables:
+  PRISMA_API_URL: "https://api0.prismacloud.io"
+
+stages:
+  - SCA
+
+
+checkov:
+  stage: SCA
+  image: python
+  script:
+    - apt-get update && apt-get install -y curl jq
+    - pip install checkov
+    - export REPO_ID=$(echo ${CI_PROJECT_PATH_SLUG} | sed 's/-/\//')
+    - env
+    - checkov -d . --framework sca_package --repo-id ${REPO_ID} --prisma-api-url ${PRISMA_API_URL} --bc-api-key ${PC_ACCESSKEY}::${PC_SECRETKEY} -o gitlab_sast > gitlab_sast
+  artifacts:
+    paths:
+      - gitlab_sast
+    reports:
+      sast: gitlab_sast
