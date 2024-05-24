@@ -13,7 +13,7 @@ STEP=100
 REPORT_DATE=$(date  +%m_%d_%y)
 mkdir -p $HOME/reports
 REPORT_LOCATION="$HOME/reports/PC_Host_report_$REPORT_DATE.csv"
-echo "typeaccountID, accountName, successful, unsupported, Issues, Pending, lastScan" > $REPORT_LOCATION
+echo "type, accountID, accountName, successful, unsupported, Issues, Pending, lastScan" > $REPORT_LOCATION
 
 #Iterate through account list and get the data aggregated by account
 for ((OFFSET=0; OFFSET<=TOTAL_COUNT; OFFSET+=STEP)); do
