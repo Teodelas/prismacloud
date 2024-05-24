@@ -1,3 +1,4 @@
+# Get token and console address from Runtime Security - Manage -> System and click on the Utilities tab
 PC_APIURL=""
 TOKEN=""
 
