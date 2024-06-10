@@ -28,6 +28,7 @@ curl -k -H "Authorization: Bearer $TOKEN" \
         (.agentlessAccountState.regions // [] | map(.scanCoverage.successful) | add),
         (.agentlessAccountState.regions // [] | map(.scanCoverage.unsupported) | add),
         (.agentlessAccountState.regions // [] | map(.scanCoverage.issued) | add),
+        (.agentlessAccountState.regions // [] | map(.scanCoverage.excluded) | add),
         (.agentlessAccountState.regions // [] | map(.scanCoverage.pending) | add),
         .agentlessAccountState.lastScan
     ]) | @csv' >> $REPORT_LOCATION
