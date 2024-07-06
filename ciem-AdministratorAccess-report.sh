@@ -1,3 +1,5 @@
+#!/bin/bash 
+
 #Tenant Info
 PC_APIURL="https://apix.prismacloud.io"
 PC_ACCESSKEY=""
