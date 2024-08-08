@@ -1,0 +1,33 @@
+{
+    "properties": {
+        "roleName": "Prisma Cloud Agentless Resource Group Scoped Role",
+        "description": "Prisma Cloud Agentless write custom role",
+        "assignableScopes": [
+            "/subscriptions/subscription-id/resourceGroups/PCCAgentlessScanResourceGroup"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Compute/disks/delete",
+                    "Microsoft.Compute/disks/write",
+                    "Microsoft.Compute/snapshots/delete",
+                    "Microsoft.Compute/snapshots/write",
+                    "Microsoft.Compute/virtualMachines/delete",
+                    "Microsoft.Compute/virtualMachines/write",
+                    "Microsoft.Network/networkInterfaces/delete",
+                    "Microsoft.Network/networkInterfaces/join/action",
+                    "Microsoft.Network/networkInterfaces/write",
+                    "Microsoft.Network/networkSecurityGroups/delete",
+                    "Microsoft.Network/networkSecurityGroups/join/action",
+                    "Microsoft.Network/networkSecurityGroups/write",
+                    "Microsoft.Network/virtualNetworks/delete",
+                    "Microsoft.Network/virtualNetworks/subnets/join/action",
+                    "Microsoft.Network/virtualNetworks/write"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
+}
